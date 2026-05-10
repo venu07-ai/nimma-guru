@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ನಿಮ್ಮ-ಗುರು</string>
+    <string name="search">ಹುಡುಕಿ</string>
+    <string name="calendar">ಕ್ಯಾಲೆಂಡರ್</string>
+    <string name="wall_of_fame">ಗೌರವ ಫಲಕ</string>
+    <string name="profile">ಪ್ರೊಫೈಲ್</string>
+    <string name="search_hint">ಹೆಸರು ಅಥವಾ ಗ್ರಾಮದ ಮೂಲಕ ಹುಡುಕಿ</string>
+    <string name="filter_by_skill">ಕೌಶಲ್ಯದ ಮೂಲಕ ಫಿಲ್ಟರ್ ಮಾಡಿ:</string>
+    <string name="edit_guru_profile">ಗುರು ಪ್ರೊಫೈಲ್ ಸಂಪಾದಿಸಿ</string>
+    <string name="name">ಹೆಸರು</string>
+    <string name="village_street">ಗ್ರಾಮ/ಬೀದಿ</string>
+    <string name="skills_hint">ಕೌಶಲ್ಯಗಳು (ವಿರಾಮ ಚಿಹ್ನೆಯಿಂದ ಬೇರ್ಪಡಿಸಿ)</string>
+    <string name="free_hours_hint">ಉಚಿತ ಸಮಯ (ವಾರಾಂತ್ಯ)</string>
+    <string name="bio">ಪರಿಚಯ</string>
+    <string name="save_profile">ಪ್ರೊಫೈಲ್ ಉಳಿಸಿ</string>
+    <string name="upcoming_sessions">ಮುಂಬರುವ ಸ್ಥಳೀಯ ತರಗತಿಗಳು</string>
+    <string name="community_heart">ನಮ್ಮ ಸಮುದಾಯದ ಹೆಮ್ಮೆ</string>
+</resources>

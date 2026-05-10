@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Nimma-Guru</string>
+    <string name="search">Search</string>
+    <string name="calendar">Calendar</string>
+    <string name="wall_of_fame">Wall of Fame</string>
+    <string name="profile">Profile</string>
+    <string name="search_hint">Search by name or village</string>
+    <string name="filter_by_skill">Filter by Skill:</string>
+    <string name="edit_guru_profile">Edit Guru Profile</string>
+    <string name="name">Name</string>
+    <string name="village_street">Village/Street</string>
+    <string name="skills_hint">Skills (comma separated)</string>
+    <string name="free_hours_hint">Free Hours (Weekend)</string>
+    <string name="bio">Bio</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="upcoming_sessions">Upcoming Local Sessions</string>
+    <string name="community_heart">Our Community\'s Heart</string>
+</resources>
