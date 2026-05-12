@@ -7,9 +7,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/chatgpt_image_may_12__2026__04_20_02_pm"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/chatgpt_image_may_12__2026__04_20_02_pm"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nimmaguru">
         <activity

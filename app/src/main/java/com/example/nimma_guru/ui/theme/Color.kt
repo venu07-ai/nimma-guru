@@ -2,14 +2,19 @@ package com.example.nimma_guru.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val PrimaryBlue = Color(0xFF1976D2)
-val LightGreen = Color(0xFF81C784)
-val White = Color(0xFFFFFFFF)
+// Primary: Deep Indigo for a trustworthy/educational feel
+val Indigo80 = Color(0xFFD1C4E9)
+val Indigo40 = Color(0xFF3F51B5)
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// Secondary: Teal for a modern, fresh look
+val Teal80 = Color(0xFFB2DFDB)
+val Teal40 = Color(0xFF009688)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// Tertiary: Amber for highlights and "Wall of Fame"
+val Amber80 = Color(0xFFFFECB3)
+val Amber40 = Color(0xFFFFC107)
+
+val DarkGray = Color(0xFF1C1B1F)
+val SurfaceGray = Color(0xFF252429)
+val LightGray = Color(0xFFF4F4F4)
+val PureWhite = Color(0xFFFFFFFF)

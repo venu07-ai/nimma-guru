@@ -12,12 +12,20 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.font.FontWeight
 import com.example.nimma_guru.ui.components.GuruCard
 import com.example.nimma_guru.ui.viewmodel.GuruViewModel
 
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.nimma_guru.ui.viewmodel.SessionViewModel
+
 @Composable
-fun StudentHomeScreen(viewModel: GuruViewModel) {
+fun StudentHomeScreen(
+    viewModel: GuruViewModel,
+    sessionViewModel: SessionViewModel = hiltViewModel()
+) {
     val gurus by viewModel.gurus.collectAsState()
+    val sessions by sessionViewModel.sessions.collectAsState()
     
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(16.dp),
@@ -26,6 +34,24 @@ fun StudentHomeScreen(viewModel: GuruViewModel) {
         item {
             Text(text = "Welcome to Nimma-Guru", style = MaterialTheme.typography.headlineLarge)
             Text(text = "Find your perfect mentor today.", style = MaterialTheme.typography.titleMedium)
+        }
+
+        if (sessions.isNotEmpty()) {
+            item {
+                Text(text = "Next Upcoming Class", style = MaterialTheme.typography.titleLarge)
+                val nextSession = sessions.first()
+                ElevatedCard(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(text = nextSession.subject, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+                        Text(text = "with ${nextSession.guruName}", style = MaterialTheme.typography.bodyLarge)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(text = "📅 ${nextSession.date} at ${nextSession.time}", style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+            }
         }
         
         item {

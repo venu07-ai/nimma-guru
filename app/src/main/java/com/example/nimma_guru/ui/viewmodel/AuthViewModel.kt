@@ -21,6 +21,9 @@ class AuthViewModel @Inject constructor(
     private val _currentUserRole = MutableStateFlow<UserRole>(UserRole.NONE)
     val currentUserRole: StateFlow<UserRole> = _currentUserRole
 
+    private val _currentUserProfile = MutableStateFlow<com.example.nimma_guru.data.model.User?>(null)
+    val currentUserProfile: StateFlow<com.example.nimma_guru.data.model.User?> = _currentUserProfile
+
     private val _authState = MutableStateFlow<AuthState>(AuthState.Idle)
     val authState: StateFlow<AuthState> = _authState
 
@@ -41,6 +44,7 @@ class AuthViewModel @Inject constructor(
         try {
             val userProfile = userRepository.getUserProfile(uid)
             if (userProfile != null) {
+                _currentUserProfile.value = userProfile
                 _currentUserRole.value = userProfile.role
                 _authState.value = AuthState.Authenticated
             } else {
@@ -89,6 +93,7 @@ class AuthViewModel @Inject constructor(
 
     fun signOut() {
         auth.signOut()
+        _currentUserProfile.value = null
         _currentUserRole.value = UserRole.NONE
         _authState.value = AuthState.Idle
     }

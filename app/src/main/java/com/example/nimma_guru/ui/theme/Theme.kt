@@ -13,30 +13,34 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = PrimaryBlue,
-    secondary = LightGreen,
-    tertiary = Pink80,
-    background = Color(0xFF121212),
-    surface = Color(0xFF1E1E1E)
+    primary = Indigo80,
+    secondary = Teal80,
+    tertiary = Amber80,
+    background = DarkGray,
+    surface = SurfaceGray,
+    onPrimary = DarkGray,
+    onSecondary = DarkGray,
+    onBackground = LightGray,
+    onSurface = LightGray
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryBlue,
-    secondary = LightGreen,
-    tertiary = Pink40,
-    background = White,
-    surface = White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black
+    primary = Indigo40,
+    secondary = Teal40,
+    tertiary = Amber40,
+    background = LightGray,
+    surface = PureWhite,
+    onPrimary = PureWhite,
+    onSecondary = PureWhite,
+    onBackground = DarkGray,
+    onSurface = DarkGray
 )
 
 @Composable
 fun NimmaguruTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false, // Set to false to prioritize our custom palette
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

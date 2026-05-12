@@ -1,10 +1,11 @@
-package com.example.nimma_guru.ui.screens.guru
+package com.example.nimma_guru.ui.screens.student
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -23,17 +24,16 @@ import com.example.nimma_guru.ui.viewmodel.AuthViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun GuruProfileScreen(
+fun StudentProfileScreen(
     viewModel: GuruViewModel,
     settingsViewModel: SettingsViewModel,
     authViewModel: AuthViewModel
 ) {
     val currentUser by authViewModel.currentUserProfile.collectAsState()
-    
+
     var name by remember { mutableStateOf("") }
     var village by remember { mutableStateOf("") }
-    var skills by remember { mutableStateOf("") }
-    var hours by remember { mutableStateOf("") }
+    var interests by remember { mutableStateOf("") }
     var bio by remember { mutableStateOf("") }
 
     val snackbarHostState = remember { SnackbarHostState() }
@@ -43,8 +43,7 @@ fun GuruProfileScreen(
         currentUser?.let {
             name = it.name
             village = it.village
-            skills = it.skills.joinToString(", ")
-            hours = it.availableHours
+            interests = it.skills.joinToString(", ")
             bio = it.bio
         }
     }
@@ -65,7 +64,7 @@ fun GuruProfileScreen(
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             Text(
-                stringResource(R.string.edit_guru_profile),
+                "Student Profile",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
@@ -77,11 +76,10 @@ fun GuruProfileScreen(
                     modifier = Modifier.padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    ProfileField(value = name, onValueChange = { name = it }, label = stringResource(R.string.name), icon = Icons.Default.Person)
-                    ProfileField(value = village, onValueChange = { village = it }, label = stringResource(R.string.village_street), icon = Icons.Default.Home)
-                    ProfileField(value = skills, onValueChange = { skills = it }, label = stringResource(R.string.skills_hint), icon = Icons.Default.School, placeholder = "e.g. Math, Science, Carpentry")
-                    ProfileField(value = hours, onValueChange = { hours = it }, label = stringResource(R.string.free_hours_hint), icon = Icons.Default.AccessTime, placeholder = "e.g. Saturday 10 AM - 12 PM")
-                    ProfileField(value = bio, onValueChange = { bio = it }, label = stringResource(R.string.bio), icon = Icons.Default.Info, singleLine = false, minLines = 3)
+                    StudentProfileField(value = name, onValueChange = { name = it }, label = stringResource(R.string.name), icon = Icons.Default.Person)
+                    StudentProfileField(value = village, onValueChange = { village = it }, label = stringResource(R.string.village_street), icon = Icons.Default.Home)
+                    StudentProfileField(value = interests, onValueChange = { interests = it }, label = "Learning Interests", icon = Icons.AutoMirrored.Filled.MenuBook, placeholder = "e.g. Math, Science, Arts")
+                    StudentProfileField(value = bio, onValueChange = { bio = it }, label = stringResource(R.string.bio), icon = Icons.Default.Info, singleLine = false, minLines = 3)
                 }
             }
 
@@ -91,8 +89,7 @@ fun GuruProfileScreen(
                         val updatedUser = current.copy(
                             name = name,
                             village = village,
-                            skills = skills.split(",").map { it.trim() }.filter { it.isNotEmpty() },
-                            availableHours = hours,
+                            skills = interests.split(",").map { it.trim() }.filter { it.isNotEmpty() },
                             bio = bio
                         )
                         viewModel.saveGuru(updatedUser)
@@ -111,7 +108,7 @@ fun GuruProfileScreen(
 
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
-            // Settings Section
+            // Settings Section (Same as Guru)
             Text(
                 stringResource(R.string.app_settings),
                 style = MaterialTheme.typography.titleLarge,
@@ -185,7 +182,7 @@ fun GuruProfileScreen(
 }
 
 @Composable
-fun ProfileField(
+fun StudentProfileField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,

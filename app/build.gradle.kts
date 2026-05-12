@@ -73,10 +73,6 @@ dependencies {
     // Coil
     implementation(libs.coil.compose)
 
-    // Maps
-    implementation(libs.google.maps)
-    implementation(libs.maps.compose)
-    
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)

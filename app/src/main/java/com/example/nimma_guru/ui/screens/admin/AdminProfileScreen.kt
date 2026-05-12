@@ -1,4 +1,4 @@
-package com.example.nimma_guru.ui.screens.guru
+package com.example.nimma_guru.ui.screens.admin
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,42 +10,31 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.nimma_guru.R
-import com.example.nimma_guru.data.model.User
-import com.example.nimma_guru.data.model.UserRole
-import com.example.nimma_guru.ui.viewmodel.GuruViewModel
 import com.example.nimma_guru.ui.viewmodel.SettingsViewModel
 import com.example.nimma_guru.ui.viewmodel.AuthViewModel
+import com.example.nimma_guru.ui.viewmodel.GuruViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun GuruProfileScreen(
-    viewModel: GuruViewModel,
+fun AdminProfileScreen(
     settingsViewModel: SettingsViewModel,
-    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel,
+    guruViewModel: GuruViewModel = hiltViewModel()
 ) {
     val currentUser by authViewModel.currentUserProfile.collectAsState()
-    
     var name by remember { mutableStateOf("") }
-    var village by remember { mutableStateOf("") }
-    var skills by remember { mutableStateOf("") }
-    var hours by remember { mutableStateOf("") }
-    var bio by remember { mutableStateOf("") }
-
+    
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(currentUser) {
         currentUser?.let {
             name = it.name
-            village = it.village
-            skills = it.skills.joinToString(", ")
-            hours = it.availableHours
-            bio = it.bio
         }
     }
 
@@ -65,48 +54,39 @@ fun GuruProfileScreen(
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             Text(
-                stringResource(R.string.edit_guru_profile),
+                "Admin Profile",
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )
 
-            // Profile Form Card
             ElevatedCard(modifier = Modifier.fillMaxWidth()) {
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    ProfileField(value = name, onValueChange = { name = it }, label = stringResource(R.string.name), icon = Icons.Default.Person)
-                    ProfileField(value = village, onValueChange = { village = it }, label = stringResource(R.string.village_street), icon = Icons.Default.Home)
-                    ProfileField(value = skills, onValueChange = { skills = it }, label = stringResource(R.string.skills_hint), icon = Icons.Default.School, placeholder = "e.g. Math, Science, Carpentry")
-                    ProfileField(value = hours, onValueChange = { hours = it }, label = stringResource(R.string.free_hours_hint), icon = Icons.Default.AccessTime, placeholder = "e.g. Saturday 10 AM - 12 PM")
-                    ProfileField(value = bio, onValueChange = { bio = it }, label = stringResource(R.string.bio), icon = Icons.Default.Info, singleLine = false, minLines = 3)
-                }
-            }
-
-            Button(
-                onClick = {
-                    currentUser?.let { current ->
-                        val updatedUser = current.copy(
-                            name = name,
-                            village = village,
-                            skills = skills.split(",").map { it.trim() }.filter { it.isNotEmpty() },
-                            availableHours = hours,
-                            bio = bio
-                        )
-                        viewModel.saveGuru(updatedUser)
-                        scope.launch {
-                            snackbarHostState.showSnackbar("Profile updated successfully!")
-                        }
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    OutlinedTextField(
+                        value = name,
+                        onValueChange = { name = it },
+                        label = { Text("Admin Name") },
+                        modifier = Modifier.fillMaxWidth(),
+                        leadingIcon = { Icon(Icons.Default.Person, contentDescription = null) }
+                    )
+                    
+                    Button(
+                        onClick = {
+                            currentUser?.let { current ->
+                                val updatedUser = current.copy(name = name)
+                                guruViewModel.saveGuru(updatedUser)
+                                scope.launch {
+                                    snackbarHostState.showSnackbar("Admin profile updated!")
+                                }
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(Icons.Default.Save, contentDescription = null)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text("Save Name")
                     }
-                },
-                modifier = Modifier.fillMaxWidth().height(56.dp),
-                shape = MaterialTheme.shapes.medium
-            ) {
-                Icon(Icons.Default.Save, contentDescription = null)
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(stringResource(R.string.save_profile), fontWeight = FontWeight.Bold)
+                }
             }
 
             HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
@@ -182,27 +162,4 @@ fun GuruProfileScreen(
             }
         }
     }
-}
-
-@Composable
-fun ProfileField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: String,
-    icon: ImageVector,
-    placeholder: String? = null,
-    singleLine: Boolean = true,
-    minLines: Int = 1
-) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(label) },
-        leadingIcon = { Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary) },
-        modifier = Modifier.fillMaxWidth(),
-        placeholder = placeholder?.let { { Text(it) } },
-        singleLine = singleLine,
-        minLines = minLines,
-        shape = MaterialTheme.shapes.medium
-    )
 }

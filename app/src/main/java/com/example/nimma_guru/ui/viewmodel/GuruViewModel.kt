@@ -53,6 +53,11 @@ class GuruViewModel @Inject constructor(
         }
     }
 
+    fun clearFilters() {
+        _searchQuery.value = ""
+        _selectedSkills.value = emptySet()
+    }
+
     fun saveGuru(user: User) {
         viewModelScope.launch {
             userRepository.saveUserProfile(user)

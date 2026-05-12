@@ -17,7 +17,5 @@ data class User(
     val rating: Float = 0f,
     val reviewCount: Int = 0,
     val bio: String = "",
-    val isVerified: Boolean = false,
-    val latitude: Double? = null,
-    val longitude: Double? = null
+    val isVerified: Boolean = false
 )

@@ -15,4 +15,9 @@
     <string name="save_profile">Save Profile</string>
     <string name="upcoming_sessions">Upcoming Local Sessions</string>
     <string name="community_heart">Our Community\'s Heart</string>
+    <string name="app_settings">App Settings</string>
+    <string name="language">Language</string>
+    <string name="theme">Theme</string>
+    <string name="english">English</string>
+    <string name="kannada">Kannada</string>
 </resources>

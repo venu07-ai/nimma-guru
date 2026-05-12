@@ -15,4 +15,9 @@
     <string name="save_profile">ಪ್ರೊಫೈಲ್ ಉಳಿಸಿ</string>
     <string name="upcoming_sessions">ಮುಂಬರುವ ಸ್ಥಳೀಯ ತರಗತಿಗಳು</string>
     <string name="community_heart">ನಮ್ಮ ಸಮುದಾಯದ ಹೆಮ್ಮೆ</string>
+    <string name="app_settings">ಅಪ್ಲಿಕೇಶನ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು</string>
+    <string name="language">ಭಾಷೆ</string>
+    <string name="theme">ಥೀಮ್</string>
+    <string name="english">ಇಂಗ್ಲಿಷ್</string>
+    <string name="kannada">ಕನ್ನಡ</string>
 </resources>
